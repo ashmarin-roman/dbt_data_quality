@@ -1,0 +1,127 @@
+sources:
+  - name: bronze # внутреннее название источника
+    database: bronze
+    schema: bronze
+    description: "Сырые данные, выгруженные из 1С."
+    tables:
+     - name: dim_organization
+       identifier : ext_dim_01_organization
+       description: "Справочник организаций"
+       columns:
+         - name: organization_name
+           description: "Наименование организации"
+         - name: organization_status
+           description: "Статус организации: действующая, недействующая"
+         - name: vat_rate_2025
+           description: "Ставка НДС 2025"
+         - name: vat_rate_current
+           description: "Текущая ставка НДС"
+         - name: organization_uid
+           description: "Уникальный идентификатор организации"
+         - name: exported_at
+           description: "Дата обновления данных"
+     - name: dim_user_1c
+       identifier : ext_dim_05_user_1c
+       description: "Справочник пользователей 1С"
+       columns:
+         - name: user_1c_name
+           description: "Наименование пользователя 1С"
+         - name: employee_name
+           description: "ФИО сотрудника"
+         - name: employee_motivation
+           description: "Мотивация сотрудника"
+         - name: division_name
+           description: "Наименование подразделения"
+         - name: user_1c_uid
+           description: "Уникальный идентификатор пользователя 1С"
+         - name: exported_at
+           description: "Дата обновления данных"
+     - name: dim_product
+       description: "Справочник номенклатуры"
+       identifier: ext_dim_04_01_product_item
+       columns:
+         - name: product_key
+           description: "Код номенклатуры в 1С"
+         - name: product_article
+           description: "Артикул номенклатуры"
+         - name: product_name
+           description: "Наименование номенклатуры"
+         - name: product_brand_name
+           description: "Наименование бренда номенклатуры"
+         - name: product_type
+           description: "Тип номенклатуры (товар, услуга, комплект)"
+         - name: product_kind
+           description: "Вид номенклатуры"
+         - name: analysis_group
+           description: "Номенклатурная группа"
+         - name: financial_accounting_group
+           description: "Группа финансового учета (владелец номенклатуры по закупке)"
+         - name: rate_vat
+           description: "Ставка НДС номенклатуры"
+         - name: parent_group_name
+           description: "Наименование родительской группы"
+         - name: parent_group_key
+           description: "Код родительской группы"
+         - name: is_deleted
+           description: "Пометка об удалении"
+         - name: project_id
+           description: "Идентификатор проекта"
+         - name: db_name
+           description: "Имя базы данных источника"
+         - name: navigation_link
+           description: "Ссылка объекта в 1С"
+         - name: product_uid
+           description: "Уникальный идентификатор номенклатуры в 1С"
+         - name: parent_group_uid
+           description: "Уникальный идентификатор родительской группы в 1С"
+         - name: exported_at
+           description: "Дата обновления данных"
+
+     - name: doc_check_kkm_header
+       identifier : ext_doc_02_01_check_kkm_header
+       description: "Документы ЧекККМ (продажи)"
+       columns:
+         - name: doc_date
+           description: "Дата/время документа"
+         - name: doc_name
+           description: "Наименование документа"
+         - name: partner_key
+           description: "Код партнера"
+         - name: partner_name
+           description: "Наименование партнера"
+         - name: warehouse_name
+           description: "Наименование склада"
+         - name: organization_uid
+           description: "Уникальный идентификатор организации"
+         - name: cashier_name
+           description: "Наименование кассира"
+         - name: exported_at
+           description: "Дата обновления данных"
+         - name: navigation_link
+           description: "Ссылка объекта в 1С"
+         - name: doc_uid
+           description: "Уникальный идентификатор документа"
+         - name: partition_day
+           description: "Партиция по дате документа (день)"
+     - name: doc_check_kkm_tab_goods
+       identifier : ext_doc_02_02_check_kkm_tab_goods
+       description: "Записи о товарах в документах ЧекККМ"
+       columns:
+         - name: doc_name
+           description: "Наименование документа"
+         - name: rate_vat
+           description: "Ставка НДС в документе"
+         - name: seller_name
+           description: "Наименование продавца"
+         - name: product_key
+           description: "Код товара"
+         - name: date
+           description: "Дата документа"
+         - name: partition_day
+           description: "Партиция по дате документа (день)"
+         - name: doc_uid
+           description: "Уникальный идентификатор документа"
+         - name: product_uid
+           description: "Уникальный идентификатор товара"
+         - name: exported_at
+           description: "Дата обновления данных"
