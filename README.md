@@ -43,7 +43,7 @@ dbt_data_quality/
 ├── dbt_project.yml
 ├── packages.yml                    # dbt-пакеты
 └── README.md
-text## 🏷️ Соглашения по именованию
+🏷️ Соглашения по именованию
 
 - **Схема в БД:** `data_quality`
 - **Таблицы ошибок:** `err_XX_YY_...`
