@@ -6,7 +6,7 @@
       Содержит ФИО, подразделение и мотивацию для обогащения данных по ответственным в документах.""",
     meta = {
         'owner': 'data_engineering',
-        'project': '07_02_vat_quality'
+        'project': '07_data_quality'
            }
       ) 
 }}

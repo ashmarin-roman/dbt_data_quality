@@ -3,6 +3,12 @@ sources:
     database: bronze
     schema: bronze
     description: "Сырые данные, выгруженные из 1С."
+    meta:
+      owner: "data_engineering"
+      project: "07_data_quality"
+      layer: "staging"
+      source_type: "1C"
+    tags: ["bronze", "staging", "1C"]
     tables:
      - name: dim_organization
        identifier : ext_dim_01_organization
@@ -10,6 +16,9 @@ sources:
        columns:
          - name: organization_name
            description: "Наименование организации"
+           tests: 
+            - unique
+            - not_null
          - name: organization_status
            description: "Статус организации: действующая, недействующая"
          - name: vat_rate_2025
@@ -18,6 +27,9 @@ sources:
            description: "Текущая ставка НДС"
          - name: organization_uid
            description: "Уникальный идентификатор организации"
+           tests: 
+            - unique
+            - not_null
          - name: exported_at
            description: "Дата обновления данных"
      - name: dim_user_1c
@@ -34,6 +46,9 @@ sources:
            description: "Наименование подразделения"
          - name: user_1c_uid
            description: "Уникальный идентификатор пользователя 1С"
+           tests: 
+            - unique
+            - not_null
          - name: exported_at
            description: "Дата обновления данных"
      - name: dim_product
@@ -72,19 +87,34 @@ sources:
            description: "Ссылка объекта в 1С"
          - name: product_uid
            description: "Уникальный идентификатор номенклатуры в 1С"
+           tests: 
+            - unique
+            - not_null
          - name: parent_group_uid
            description: "Уникальный идентификатор родительской группы в 1С"
+           tests: 
+            - not_null
          - name: exported_at
            description: "Дата обновления данных"
 
      - name: doc_check_kkm_header
        identifier : ext_doc_02_01_check_kkm_header
        description: "Документы ЧекККМ (продажи)"
+       freshness:
+        warn_after: {count: 12, period: hour}
+        error_after: {count: 24, period: hour}
+        # filter: current_timestamp::date - exported_at::date < 3
+        filter: toDate(now()) - toDate(exported_at) < 3
+       loaded_at_field: exported_at::timestamp
        columns:
          - name: doc_date
            description: "Дата/время документа"
          - name: doc_name
            description: "Наименование документа"
+         - name: doc_status
+           description: "Статус документа: пробит/отложен"
+         - name: is_posted
+           description: "Признак - документ проведён"
          - name: partner_key
            description: "Код партнера"
          - name: partner_name
@@ -95,14 +125,22 @@ sources:
            description: "Уникальный идентификатор организации"
          - name: cashier_name
            description: "Наименование кассира"
+         - name: cashier_uid
+           description: "Уникальный идентификатор кассира"  
          - name: exported_at
            description: "Дата обновления данных"
          - name: navigation_link
            description: "Ссылка объекта в 1С"
          - name: doc_uid
            description: "Уникальный идентификатор документа"
+           tests: 
+            - unique
+            - not_null
+         - name: doc_type
+           description: "Тип документа"
          - name: partition_day
            description: "Партиция по дате документа (день)"
+
      - name: doc_check_kkm_tab_goods
        identifier : ext_doc_02_02_check_kkm_tab_goods
        description: "Записи о товарах в документах ЧекККМ"
@@ -113,15 +151,25 @@ sources:
            description: "Ставка НДС в документе"
          - name: seller_name
            description: "Наименование продавца"
+         - name: seller_uid
+           description: "Уникальный идентификатор продавца"
          - name: product_key
            description: "Код товара"
+         - name: product_uid
+           description: "Уникальный идентификатор товара"
          - name: date
            description: "Дата документа"
          - name: partition_day
            description: "Партиция по дате документа (день)"
          - name: doc_uid
            description: "Уникальный идентификатор документа"
-         - name: product_uid
-           description: "Уникальный идентификатор товара"
+           tests: 
+            - not_null
          - name: exported_at
            description: "Дата обновления данных"
+       freshness:
+        warn_after: {count: 12, period: hour}
+        error_after: {count: 24, period: hour}
+        # filter: current_timestamp::date - exported_at::date < 3
+        filter: toDate(now()) - toDate(exported_at) < 3
+       loaded_at_field: exported_at::timestamp

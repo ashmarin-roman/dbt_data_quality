@@ -7,7 +7,7 @@
       Содержит ключевые атрибуты, включая ставки НДС организации.""",
     meta = {
         'owner': 'data_engineering',
-        'project': '07_02_vat_quality'
+        'project': '07_data_quality'
            }
     )
 }}

@@ -1,0 +1,56 @@
+version: 2
+
+models:
+  - name: int_07_02_check_kkm_enriched
+    description: "Обогащённый данными из справочников документ - Чек ККМ"
+    columns:
+      - name: doc_date
+        description: "Дата документа"
+      - name: doc_name
+        description: "Наименование документа"
+      - name: doc_status
+        description: "Статус документа"
+      - name: is_posted
+        description: "Признак проведения документа"
+      - name: partner_key
+        description: "Код партнера"
+      - name: partner_name
+        description: "Наименование партнера"
+      - name: warehouse_name
+        description: "Наименование склада"
+      - name: organization_uid
+        description: "Уникальный идентификатор организации"
+      - name: cashier_name
+        description: "ФИО кассира"
+      - name: navigation_link
+        description: "Ссылка на документ в 1С"
+      - name: doc_uid
+        description: "Уникальный идентификатор документа"
+      - name: doc_type
+        description: "Тип документа"
+      - name: partition_day
+        description: "Партиция по дате документа (YYYY-MM-DD)"
+      - name: seller_name
+        description: "ФИО продавца"
+      - name: product_uid
+        description: "Уникальный идентификатор номенклатуры"
+      - name: sale_rate_vat
+        description: "Ставка НДС по документу продажи"
+      - name: is_goods_row_exists
+        description: "Признак наличия строк с номенклатурой в документе"
+      - name: exported_at_doc
+        description: "Дата выгрузки шапки документа"
+      - name: exported_at_goods
+        description: "Дата выгрузки табличной части с номенклатурой"
+      - name: prepared_at
+        description: "Дата создания/обновления записи в prepared-слое"
+      - name: organization_name
+        description: "Наименование организации"
+      - name: organization_vat_rate_2025
+        description: "Ставка НДС организации на 2025 год"
+      - name: organization_vat_rate_current
+        description: "Текущая ставка НДС организации"
+      - name: product_rate_vat
+        description: "Ставка НДС по номенклатуре"
+      - name: division_name
+        description: "Подразделение продавца"

@@ -1,13 +1,13 @@
 {{
   config(
     materialized = 'view',
-    tags = ['bronze', 'staging'],
+    tags = ['bronze', 'staging', 'check_kkm'],
     description = """
       Стадия Bronze (staging). Отбор полей табличной части (товары) документов Чек ККМ.
       Включает rate_vat по строкам — ключевой атрибут для выявления некорректных ставок НДС.""",
     meta = {
         'owner': 'data_engineering',
-        'project': '07_02_vat_quality'
+        'project': '07_data_quality'
            }
     )
 }}
@@ -29,6 +29,7 @@ select
   {# ProtsentRuchnoySkidki, #} {# FUTURE: стандартизировать название + добавить в источники, по мере необходимости #}
   {# SummaRuchnoySkidki, #} {# FUTURE: стандартизировать название + добавить в источники, по мере необходимости #}
   seller_name,
+  seller_uid,
   {# SummaBonusnykhBallovKSpisaniyu, #} {# FUTURE: стандартизировать название + добавить в источники, по мере необходимости #}
   {# SummaBonusnykhBallovKSpisaniyuVValyute, #} {# FUTURE: стандартизировать название + добавить в источники, по мере необходимости #}
   {# SummaNachislennykhBonusnykhBallovVValyute, #} {# FUTURE: стандартизировать название + добавить в источники, по мере необходимости #}
@@ -41,7 +42,6 @@ select
   partition_day,
   doc_uid,
   product_uid,
-  {# seller_uid, #} {# FUTURE: добавить в источники, по мере необходимости #}
   {# project_id, #} {# FUTURE: добавить в источники, по мере необходимости #}
   {# db_type, #} {# FUTURE: добавить в источники, по мере необходимости #}
   {# db_name, #} {# FUTURE: добавить в источники, по мере необходимости #}

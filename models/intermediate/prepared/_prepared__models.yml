@@ -1,0 +1,53 @@
+# models/intermediate/prepared/_prepared__models.yml
+version: 2
+
+models:
+  - name: int_check_kkm_prepared
+    description: "Подготовленный документ Чек ККМ (шапка + товары + метаданные выгрузки)"
+    columns:
+      - name: doc_date
+        description: "Дата документа"
+      - name: doc_name
+        description: "Наименование документа"
+      - name: doc_status
+        description: "Статус документа"
+      - name: is_posted
+        description: "Признак проведения документа"
+      - name: partner_key
+        description: "Код партнера"
+      - name: partner_name
+        description: "Наименование партнера"
+      - name: warehouse_name
+        description: "Наименование склада"
+      - name: organization_uid
+        description: "Уникальный идентификатор организации"
+      - name: cashier_name
+        description: "ФИО кассира"
+      - name: navigation_link
+        description: "Ссылка на документ в 1С"
+      - name: doc_uid
+        description: "Уникальный идентификатор документа"
+      - name: partition_day
+        description: "Партиция по дате документа (YYYY-MM-DD)"
+      - name: seller_name
+        description: "ФИО продавца"
+      - name: product_uid
+        description: "Уникальный идентификатор номенклатуры"
+      - name: sale_rate_vat
+        description: "Ставка НДС по документу продажи"
+      - name: is_goods_row_exists
+        description: "Признак наличия строк с номенклатурой в документе"
+      - name: exported_at_doc
+        description: "Дата выгрузки шапки документа"
+      - name: exported_at_goods
+        description: "Дата выгрузки табличной части с номенклатурой"
+      - name: prepared_at
+        description: "Дата создания/обновления записи в prepared-слое"
+
+  - name: int_sale_doc_prepared
+    description: "Подготовленный документ Реализация товаров и услуг"
+    # ... аналогично
+
+  - name: int_refund_sale_doc_prepared
+    description: "Подготовленный документ Возврат от клиента"
+    # ...

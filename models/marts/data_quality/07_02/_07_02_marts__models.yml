@@ -1,0 +1,68 @@
+version: 2
+
+models:
+  - name: mart_07_02_check_kkm_errors
+    description: "Ошибки ставок НДС в документах Чек ККМ"
+    config:
+      materialized: table
+    columns:
+      - name: partition_day
+        description: "Дата партиции"
+      - name: doc_date
+        description: "Дата документа"
+      - name: doc_name
+        description: "Наименование документа"
+      - name: doc_type
+        description: "Тип документа"
+      - name: doc_status
+        description: "Статус документа"
+      - name: partner_key
+        description: "Ключ партнера"
+      - name: partner_name
+        description: "Наименование партнера"
+      - name: warehouse_name
+        description: "Наименование склада"
+      - name: cashier_name
+        description: "Наименование кассира"
+      - name: organization_name
+        description: "Наименование организации"
+      - name: division_name
+        description: "Наименование подразделения"
+      - name: seller_name
+        description: "Наименование продавца"
+      - name: organization_vat_rate_current
+        description: "Текущая ставка НДС организации"
+      - name: product_rate_vat
+        description: "Ставка НДС по номенклатуре"
+      - name: sale_rate_vat
+        description: "Ставка НДС в документе продажи"
+      - name: kkm_error_description
+        description: "Описание ошибки ставки НДС"
+      - name: is_posted
+        description: "Флаг опубликованности документа"
+      - name: is_goods_row_exists
+        description: "Флаг наличия строк с товарами"
+      - name: navigation_link
+        description: "Ссылка на документ в 1С"
+      - name: exported_at_doc
+        description: "Дата экспорта документа"
+      - name: exported_at_goods
+        description: "Дата экспорта строк с товарами"
+      - name: prepared_at
+        description: "Дата подготовки"
+      - name: exported_errors_at
+        description: "Дата расчёта ошибки"
+
+
+  - name: mart_07_02_sale_doc_errors
+    description: "Ошибки ставок НДС в документах Реализация товаров и услуг"
+    # ... аналогично
+
+  - name: mart_07_02_refund_sale_doc_errors
+    description: "Ошибки ставок НДС в документах Возврат от клиента"
+    # ...
+
+  - name: mart_07_02_all_errors
+    description: "Общая витрина всех ошибок ставок НДС по проекту 07.02"
+    config:
+      materialized: view
